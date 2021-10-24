@@ -1,0 +1,66 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    v1.docs.serverless.com
+#
+# Happy Coding!
+
+service: lamda-im-wrkshp-doge-1 # NOTE: update this with your service name
+
+provider:
+  name: aws
+  region: us-east-2
+  runtime: nodejs10.x
+  # iamRoleStatements:
+  #     -  Effect: "Allow"
+  #        Action:
+  #          - "s3:ListBucket"
+  #        Resource: { "Fn::Join" : ["", ["arn:aws:s3:::", { "Ref" : "lamda-im-wrkshp-doge-428591362-54846382573028808-28624414408079800"} ] ] }
+  #     -  Effect: "Allow"
+  #        Action:
+  #          - "s3:PutObject"
+  #        Resource:
+  #          Fn::Join:
+  #            - ""
+  #            - - "arn:aws:s3:::"
+  #              - "Ref" : "lamda-im-wrkshp-doge-1"
+
+#package:
+#  include:
+#   - functions
+
+functions:
+  create:
+    handler: doge.create
+    memorySize: 128
+    timeout: 30
+    events:
+      - http:
+          path: doge/create
+          method: get
+#      - s3:
+#          bucket: lamda-im-wrkshp-doge-1
+#          event: s3:ObjectCreated:*
+
+#   you can add any of the following events
+#   events:
+#     - http:
+#         path: users/create
+#         method: get
+#     - s3: ${bucket}
+#     - schedule: rate(10 minutes)
+#     - sns: greeter-topic
+
+# you can add CloudFormation resource templates here
+resources:
+  Resources:
+    newResource:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: lamda-im-wrkshp-doge-1
